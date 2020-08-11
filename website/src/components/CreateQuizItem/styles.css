@@ -16,4 +16,21 @@
     font-weight: 150;
     background-color: var(--green-input);
     color: white;
+
+    display: flex;
+    align-items: center;
 }
+
+.answer {
+    display: flex;
+    flex-direction: column;
+    padding: 0.3rem;
+}
+
+.answer .options {
+    height: 4rem;
+    border: 0;
+    border-radius: 0.8rem; 
+    background-color: gray;
+}
+
