@@ -1,10 +1,11 @@
 import React from 'react';
 
+import CreateQuiz from './pages/CreateQuiz';
 
 function App() {
   return (
     <div className="App">
-      Hello World!
+      <CreateQuiz />
     </div>
   );
 }

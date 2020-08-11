@@ -1,7 +1,8 @@
 :root {
   font-size: 60%;
+  background-color: #e6e6e6;
 
-
+  --green-input: #0dbd0d;
 }
 
 * {
@@ -10,8 +11,8 @@
 }
 
 html, body {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 @media(maxwidth: 1000) {

@@ -1,0 +1,19 @@
+.quiz-item-container {
+    width: 100%;
+    margin-top: 2.4rem;
+    min-height: 20rem;
+    background-color: white;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    box-shadow: 0.2rem 0.2rem 0.4rem #3f3f3f;
+}
+
+.question {
+    padding: 0.8rem;
+    min-height: 3rem;
+    font-size: 1.6rem;
+    font-family: 'Oswald';
+    font-weight: 150;
+    background-color: var(--green-input);
+    color: white;
+}
