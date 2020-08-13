@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
+import { faLongArrowAltLeft, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import CreateQuizItem from '../../components/CreateQuizItem'
 
@@ -19,15 +19,25 @@ const CreateQuiz = () =>
 
         <main className="create-quiz-page-body">
             <h1>Make your own Quizzyes!</h1>
-            <h2>Just write down the <br />questions and it'll be ready to share.</h2>
+            <h2>Just write down the <br />
+                questions and it'll be ready to share.</h2>
             <form className="questions-container">
                 <CreateQuizItem />
                 <CreateQuizItem />
                 <CreateQuizItem />
                 <CreateQuizItem />
                 <CreateQuizItem />
-
-                <input type="submit" value="Done!" className="submit-button" />
+                <div className="add-question-button">
+                    <FontAwesomeIcon 
+                    icon={faPlus} 
+                    className="add-question-icon" />
+                    <p>More Questions</p>
+                </div>
+                <input
+                    type="submit"
+                    value="Done!"
+                    className="submit-button"
+                />
             </form>
         </main>
     </div>
