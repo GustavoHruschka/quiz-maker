@@ -2,20 +2,65 @@ import React from 'react'
 
 import './styles.css'
 
-const CreateQuizItem = () =>
-    <div className="quiz-item-container">
-        <div className="question">
-            Write your questions here
-        </div>
-        <div className="answer">
-            <input type="button" value="Option 1" className="options" />
-            <input type="button" value="Option 2" className="options" />
-            <input type="button" value="Option 3" className="options" />
-            <div className="add-option-button">
+interface myState {
+    questionText: String
+    optionsText: Array<String>
+}
 
-                <p className="add-option">Add option</p> 
+class CreateQuizItem extends React.Component<{}, myState> {
+    constructor(props: Readonly<{}>) {
+        super(props)
+        this.state = {
+            questionText: '',
+            optionsText: ['', '']
+        }
+    }
+
+    handleAddOption() {
+        this.setState(previousState => ({
+            optionsText: [...previousState.optionsText, '']
+        }))
+
+        console.log('this.state')
+    }
+
+    handleQuestionTextChange(event: React.FormEvent<HTMLTextAreaElement>) {
+        this.setState({ questionText: event.currentTarget.value })
+
+        console.log(this.state)
+    }
+
+    render() {
+        return (
+            <div className="quiz-item-container">
+                <textarea
+                    className="question"
+                    placeholder="Write your question here."
+                    onChange={event => this.handleQuestionTextChange(event)}
+                />
+
+                <div className="answer">
+                    {this.state.optionsText.map((value, index) => {
+                        return (
+                            <input
+                                key={index}
+                                type="text"
+                                className="options"
+                                placeholder={`Option `+ (index + 1)}
+                            />
+                        )
+                    })}
+
+                    <input
+                        type="button"
+                        className="add-option-button"
+                        onClick={() => this.handleAddOption()}
+                        value="Add option"
+                    />
+                </div>
             </div>
-        </div>
-    </div>
+        )
+    }
+}
 
 export default CreateQuizItem
