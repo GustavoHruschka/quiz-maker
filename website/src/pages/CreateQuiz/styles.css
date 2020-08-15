@@ -93,3 +93,11 @@
 .create-quiz-page-body .questions-container .submit-button:hover {
     background-color: #4b1fb3;
 }
+
+@media(min-width: 1000px) {
+    .create-quiz-page-body {
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-top: 2rem;
+    }
+}
