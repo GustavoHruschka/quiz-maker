@@ -1,20 +1,24 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 import './styles.css'
 
 interface myState {
     questionText: String
     optionsText: Array<String>
-    correctOptionIndex: number
 }
 
-class CreateQuizItem extends React.Component<{}, myState> {
-    constructor(props: Readonly<{}>) {
+interface myProps {
+    questionNumber: number
+}
+
+class CreateQuizItem extends React.Component<myProps, myState> {
+    constructor(props: Readonly<myProps>) {
         super(props)
         this.state = {
             questionText: '',
             optionsText: ['', ''],
-            correctOptionIndex: 0,
         }
     }
 
@@ -22,6 +26,7 @@ class CreateQuizItem extends React.Component<{}, myState> {
         this.setState(previousState => ({
             optionsText: [...previousState.optionsText, '']
         }))
+        console.log(this.state.optionsText)
     }
 
     handleQuestionTextChange(event: React.FormEvent<HTMLTextAreaElement>) {
@@ -40,30 +45,35 @@ class CreateQuizItem extends React.Component<{}, myState> {
                 <div className="answer">
                     {this.state.optionsText.map((value, index) => {
                         return (
-                            <div
-                                className="option-box"
-                                key={'box' + index}
-                            >
-
+                            <div className="option-box" key={'box' + index}>
                                 <input
                                     className="options"
                                     key={'text' + index}
                                     type="text"
                                     placeholder={`Option ` + (index + 1)}
                                 />
-                                <div
-                                    className="select-right-option-box"
-                                    style={{
-                                        backgroundColor:
-                                            this.state.correctOptionIndex === index ? '#59eb4c' : '#eb5f4c'
-                                    }}
+
+                                <label
+                                    htmlFor={'radio' + index + 'question' + this.props.questionNumber}
+                                    className="right-option-selector-container"
                                 >
                                     <input
-                                        className="select-right-option"
+                                        className="right-option-selector"
                                         key={'radio' + index}
+                                        id={'radio' + index + 'question' + this.props.questionNumber}
                                         type="radio"
-                                        name="select-right-option"
+                                        name={"select-right-option" + this.props.questionNumber}
                                         value={index}
+                                    />
+                                    <span className="checkmark"></span>
+                                </label>
+
+                                <div 
+                                    className="delete-option-button"
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faTrashAlt}
+                                        className="delete-option-icon"
                                     />
                                 </div>
                             </div>

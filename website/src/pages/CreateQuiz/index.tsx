@@ -6,8 +6,23 @@ import CreateQuizItem from '../../components/CreateQuizItem'
 
 import './styles.css'
 
-class CreateQuiz extends React.Component {
-    
+interface myState {
+    questions: Array<number>
+}
+
+class CreateQuiz extends React.Component<{}, myState> {
+    constructor(props: Readonly<{}>) {
+        super(props)
+        this.state = {
+            questions: [0, ]
+        }
+    }
+
+    handleAddQuestion() {
+        this.setState(previousState => ({
+            questions: [...previousState.questions, previousState.questions.length]
+        }))
+    }
 
     render() {
         return (
@@ -26,12 +41,18 @@ class CreateQuiz extends React.Component {
                     <h2>Just write down the <br />
                 questions and it'll be ready to share.</h2>
                     <form className="questions-container">
-                        <CreateQuizItem />
-                        <CreateQuizItem />
-                        <CreateQuizItem />
-                        <CreateQuizItem />
-                        <CreateQuizItem />
-                        <div className="add-question-button">
+
+                        {this.state.questions.map(questionNumber => 
+                            <CreateQuizItem 
+                                key={questionNumber}
+                                questionNumber={questionNumber}
+                            />
+                        )}
+
+                        <div 
+                            className="add-question-button" 
+                            onClick={() => this.handleAddQuestion()}
+                        >
                             <FontAwesomeIcon
                                 icon={faPlus}
                                 className="add-question-icon" />

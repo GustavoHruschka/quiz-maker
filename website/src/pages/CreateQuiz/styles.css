@@ -61,6 +61,7 @@
     font-family: 'Oswald';
     box-shadow: 0.2rem 0.2rem 0.4rem #000000;
     
+    cursor: pointer;
     transition: 200ms;
 
     display: flex;
@@ -88,6 +89,7 @@
     border-radius: 0.8rem;
     box-shadow: 0.2rem 0.2rem 0.4rem #000000;
 
+    cursor: pointer;
     transition: 200ms;
 }
 .create-quiz-page-body .questions-container .submit-button:hover {
