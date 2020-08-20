@@ -1,11 +1,36 @@
 .quiz-item-container {
     width: 100%;
     margin-top: 2.4rem;
-    min-height: 20rem;
+
     background-color: #b3b2b2;
     border-radius: 0.4rem;
     overflow: hidden;
     box-shadow: 0.2rem 0.2rem 0.4rem #000000;
+}
+
+.quiz-item-header {
+    background-color: blueviolet;
+    height: 2rem;
+    color: white;
+    border-bottom: solid 0.15rem #121212;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.quiz-item-header .header-button{
+    width: 2rem;
+    height: 100%;
+    border-left: solid 0.15rem #121212;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-item-header .header-button .header-button-icon {
+    font-size: 1.2rem;
 }
 
 .question {
