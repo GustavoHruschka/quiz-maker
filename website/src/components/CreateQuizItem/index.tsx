@@ -1,32 +1,33 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { faWindowMinimize } from '@fortawesome/free-regular-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faWindowMinimize, faWindowMaximize, faWindowClose } from '@fortawesome/free-regular-svg-icons'
 
 import './styles.css'
 
 interface myState {
-    questionMinimized: boolean
+    isQuestionMinimized: boolean
     questionText: string
     optionsText: Array<string>
 }
 
 interface myProps {
-    questionNumber: number
+    questionId: number
+    handleDeleteQuestion: Function
 }
 
 class CreateQuizItem extends React.Component<myProps, myState> {
     constructor(props: Readonly<myProps>) {
         super(props)
         this.state = {
-            questionMinimized: false,
+            isQuestionMinimized: false,
             questionText: '',
-            optionsText: ['', ''],
+            optionsText: ['', '',],
         }
     }
 
     handleQuestionWindowToggle() {
-        this.setState({ questionMinimized: !this.state.questionMinimized })
+        this.setState({ isQuestionMinimized: !this.state.isQuestionMinimized })
         console.log(this.state)
     }
 
@@ -52,28 +53,34 @@ class CreateQuizItem extends React.Component<myProps, myState> {
         optionsTextCopy.splice(optionNumber, 1)
 
         this.setState({ optionsText: optionsTextCopy })
-        console.log(this.state)
     }
 
     render() {
         return (
             <div className="quiz-item-container">
                 <div className="quiz-item-header">
-                    <div className="header-button">
-                        <FontAwesomeIcon icon={faWindowMinimize} className="header-button-icon" />
+                    <p className="quiz-item-logo">Quizzyes</p>
+                    <div
+                        className="header-button"
+                        onClick={() => this.handleQuestionWindowToggle()}
+                    >
+                        <FontAwesomeIcon icon={this.state.isQuestionMinimized ? faWindowMaximize : faWindowMinimize} className="header-button-icon" />
                     </div>
-                    <div className="header-button" onClick={() => this.handleQuestionWindowToggle()}>
-                        <FontAwesomeIcon icon={faTimes} className="header-button-icon" />
+                    <div
+                        className="header-button"
+                        onClick={() => this.props.handleDeleteQuestion(this.props.questionId)}
+                    >
+                        <FontAwesomeIcon icon={faWindowClose} className="header-button-icon" />
                     </div>
                 </div>
 
                 <textarea
                     className="question"
-                    placeholder="Write your question here."
+                    placeholder="Write your question here"
                     onChange={event => this.handleQuestionTextChange(event)}
                 />
 
-                {this.state.questionMinimized ? null :
+                {this.state.isQuestionMinimized ? null :
                     <div className="answer">
                         {this.state.optionsText.map((optionValue, optionNumber) => {
                             return (
@@ -88,15 +95,15 @@ class CreateQuizItem extends React.Component<myProps, myState> {
                                     />
 
                                     <label
-                                        htmlFor={'radio' + optionNumber + 'question' + this.props.questionNumber}
+                                        htmlFor={'radio' + optionNumber + 'question' + this.props.questionId}
                                         className="right-option-selector-container"
                                     >
                                         <input
                                             className="right-option-selector"
                                             key={'radio' + optionNumber}
-                                            id={'radio' + optionNumber + 'question' + this.props.questionNumber}
+                                            id={'radio' + optionNumber + 'question' + this.props.questionId}
                                             type="radio"
-                                            name={"select-right-option" + this.props.questionNumber}
+                                            name={"select-right-option" + this.props.questionId}
                                             value={optionNumber}
                                         />
                                         <span className="checkmark"></span>

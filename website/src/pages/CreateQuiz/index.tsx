@@ -7,22 +7,42 @@ import CreateQuizItem from '../../components/CreateQuizItem'
 import './styles.css'
 
 interface myState {
-    questions: Array<number>
+    questionsId: Array<number>
+    questionsIdCounter: number
 }
 
 class CreateQuiz extends React.Component<{}, myState> {
     constructor(props: Readonly<{}>) {
         super(props)
         this.state = {
-            questions: [0, ]
+            questionsId: [0, 1,],
+            questionsIdCounter: 2
         }
+
+        this.handleDeleteQuestion = this.handleDeleteQuestion.bind(this)
     }
 
     handleAddQuestion() {
         this.setState(previousState => ({
-            questions: [...previousState.questions, previousState.questions.length]
+            questionsId: [...previousState.questionsId, this.state.questionsIdCounter]
         }))
+        this.setState({ questionsIdCounter: this.state.questionsIdCounter + 1 })
     }
+
+    handleDeleteQuestion(questionId: number) {
+        if (this.state.questionsId.length === 1) {
+            alert("You can't delete all the questions")
+        }
+
+        else {
+            let questionsCopy = this.state.questionsId
+            let index = questionsCopy.indexOf(questionId)
+            questionsCopy.splice(index, 1)
+
+            this.setState({ questionsId: questionsCopy })
+        }
+    }
+
 
     render() {
         return (
@@ -42,20 +62,22 @@ class CreateQuiz extends React.Component<{}, myState> {
                 questions and it'll be ready to share.</h2>
                     <form className="questions-container">
 
-                        {this.state.questions.map(questionNumber => 
-                            <CreateQuizItem 
-                                key={questionNumber}
-                                questionNumber={questionNumber}
+                        {this.state.questionsId.map((questionId) =>
+                            <CreateQuizItem
+                                key={questionId}
+                                questionId={questionId}
+                                handleDeleteQuestion={this.handleDeleteQuestion}
                             />
                         )}
 
-                        <div 
-                            className="add-question-button" 
+                        <div
+                            className="add-question-button"
                             onClick={() => this.handleAddQuestion()}
                         >
                             <FontAwesomeIcon
                                 icon={faPlus}
-                                className="add-question-icon" />
+                                className="add-question-icon"
+                            />
                             <p>More Questions</p>
                         </div>
                         <input
