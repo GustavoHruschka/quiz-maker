@@ -7,8 +7,10 @@ import './styles.css'
 
 interface myState {
     isQuestionMinimized: boolean
+    
     questionText: string
     optionsText: Array<string>
+    rightOptionNumber: number
 }
 
 interface myProps {
@@ -23,6 +25,7 @@ class CreateQuizItem extends React.Component<myProps, myState> {
             isQuestionMinimized: false,
             questionText: '',
             optionsText: ['', '',],
+            rightOptionNumber: 0
         }
     }
 
@@ -49,10 +52,18 @@ class CreateQuizItem extends React.Component<myProps, myState> {
     }
 
     handleDeleteOption(optionNumber: number) {
-        let optionsTextCopy = this.state.optionsText
-        optionsTextCopy.splice(optionNumber, 1)
+        if (this.state.optionsText.length === 1) {
+            window.alert("You can't delete all the options.")
+        } else {
+            let optionsTextCopy = this.state.optionsText
+            optionsTextCopy.splice(optionNumber, 1)
 
-        this.setState({ optionsText: optionsTextCopy })
+            this.setState({ optionsText: optionsTextCopy })
+        }
+    }
+
+    handleSelectOption(optionNumber: number) {
+        this.setState({ rightOptionNumber: optionNumber })
     }
 
     render() {
@@ -104,7 +115,7 @@ class CreateQuizItem extends React.Component<myProps, myState> {
                                             id={'radio' + optionNumber + 'question' + this.props.questionId}
                                             type="radio"
                                             name={"select-right-option" + this.props.questionId}
-                                            value={optionNumber}
+                                            onChange={() => this.handleSelectOption(optionNumber)}
                                         />
                                         <span className="checkmark"></span>
                                     </label>

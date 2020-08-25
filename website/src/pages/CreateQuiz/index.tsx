@@ -43,7 +43,6 @@ class CreateQuiz extends React.Component<{}, myState> {
         }
     }
 
-
     render() {
         return (
             <div id="create-quiz-page-container">
