@@ -6,40 +6,117 @@ import CreateQuizItem from '../../components/CreateQuizItem'
 
 import './styles.css'
 
+
+interface questionItem {
+    questionText: string
+    optionsText: Array<string>
+    selectedRightOptionNumber: number
+}
+
+const blankQuestionItem: questionItem = {
+    questionText: '',
+    optionsText: ['', ''],
+    selectedRightOptionNumber: 0
+}
+
 interface myState {
-    questionsId: Array<number>
-    questionsIdCounter: number
+    questions: Array<questionItem>
 }
 
 class CreateQuiz extends React.Component<{}, myState> {
     constructor(props: Readonly<{}>) {
         super(props)
         this.state = {
-            questionsId: [0, 1,],
-            questionsIdCounter: 2
+            questions: [blankQuestionItem, blankQuestionItem],
         }
 
         this.handleDeleteQuestion = this.handleDeleteQuestion.bind(this)
+        this.handleQuestionTextChange = this.handleQuestionTextChange.bind(this)
+        this.handleOptionTextChange = this.handleOptionTextChange.bind(this)
+        this.handleSelectRightOption = this.handleSelectRightOption.bind(this)
+        this.handleAddOption = this.handleAddOption.bind(this)
+        this.handleDeleteOption = this.handleDeleteOption.bind(this)
+    }
+
+    handleSubmitQuiz() {
+        console.log(this.state.questions)
     }
 
     handleAddQuestion() {
-        this.setState(previousState => ({
-            questionsId: [...previousState.questionsId, this.state.questionsIdCounter]
-        }))
-        this.setState({ questionsIdCounter: this.state.questionsIdCounter + 1 })
+        let questionsCopy = [...this.state.questions]
+        questionsCopy.push(blankQuestionItem)
+        this.setState({ questions: questionsCopy })
     }
 
-    handleDeleteQuestion(questionId: number) {
-        if (this.state.questionsId.length === 1) {
+    handleDeleteQuestion(questionNumber: number) {
+        if (this.state.questions.length === 1) {
             alert("You can't delete all the questions")
+        } else {
+            let questionsCopy = this.state.questions
+            questionsCopy.splice(questionNumber, 1)
+            this.setState({ questions: questionsCopy })
         }
+    }
 
-        else {
-            let questionsCopy = this.state.questionsId
-            let index = questionsCopy.indexOf(questionId)
-            questionsCopy.splice(index, 1)
+    handleQuestionTextChange(event: React.FormEvent<HTMLTextAreaElement>, questionNumber: number) {
+        let questionsCopy = [...this.state.questions]
+        let questionCopy = { ...questionsCopy[questionNumber] }
 
-            this.setState({ questionsId: questionsCopy })
+        questionCopy.questionText = event.currentTarget.value
+        questionsCopy[questionNumber] = questionCopy
+
+        this.setState({ questions: questionsCopy })
+    }
+
+    handleOptionTextChange(event: React.FormEvent<HTMLInputElement>, questionNumber: number, optionNumber: number) {
+        let questionsCopy = [...this.state.questions]
+        let questionCopy = { ...questionsCopy[questionNumber] }
+        let optionsTextCopy = [...questionCopy.optionsText]
+
+        optionsTextCopy[optionNumber] = event.currentTarget.value
+        questionCopy.optionsText = optionsTextCopy
+        questionsCopy[questionNumber] = questionCopy
+
+        this.setState({ questions: questionsCopy })
+    }
+
+    handleSelectRightOption(questionNumber: number, optionNumber: number) {
+        let questionsCopy = [...this.state.questions]
+        let questionCopy = { ...questionsCopy[questionNumber] }
+
+        questionCopy.selectedRightOptionNumber = optionNumber
+        questionsCopy[questionNumber] = questionCopy
+
+        this.setState({ questions: questionsCopy })
+        console.log(this.state)
+    }
+
+    handleAddOption(questionNumber: number) {
+        let questionsCopy = [...this.state.questions]
+        let questionCopy = { ...questionsCopy[questionNumber] }
+        let optionsTextCopy = [...questionCopy.optionsText]
+
+        optionsTextCopy.push('')
+        questionCopy.optionsText = optionsTextCopy
+        questionsCopy[questionNumber] = questionCopy
+
+        this.setState({ questions: questionsCopy })
+        console.log(this.state)
+    }
+
+    handleDeleteOption(questionNumber: number, optionNumber: number) {
+        if (this.state.questions[questionNumber].optionsText.length === 1) {
+            window.alert("You can't delete all the options")
+        } else {
+            let questionsCopy = [...this.state.questions]
+            let questionCopy = { ...questionsCopy[questionNumber] }
+            let optionsTextCopy = [...questionCopy.optionsText]
+
+            optionsTextCopy.splice(optionNumber, 1)
+            questionCopy.optionsText = optionsTextCopy
+            questionsCopy[questionNumber] = questionCopy
+
+            this.setState({ questions: questionsCopy })
         }
     }
 
@@ -60,12 +137,18 @@ class CreateQuiz extends React.Component<{}, myState> {
                     <h2>Just write down the <br />
                 questions and it'll be ready to share.</h2>
                     <form className="questions-container">
-
-                        {this.state.questionsId.map((questionId) =>
+                        {this.state.questions.map((question, index) =>
                             <CreateQuizItem
-                                key={questionId}
-                                questionId={questionId}
+                                key={index}
+                                questionNumber={index}
+                                questionData={question}
+
                                 handleDeleteQuestion={this.handleDeleteQuestion}
+                                handleQuestionTextchange={this.handleQuestionTextChange}
+                                handleOptionTextChange={this.handleOptionTextChange}
+                                handleSelectRightOption={this.handleSelectRightOption}
+                                handleAddOption={this.handleAddOption}
+                                handleDeleteOption={this.handleDeleteOption}
                             />
                         )}
 
@@ -80,9 +163,10 @@ class CreateQuiz extends React.Component<{}, myState> {
                             <p>More Questions</p>
                         </div>
                         <input
-                            type="submit"
-                            value="Done!"
+                            type="button"
+                            value="Submit Quiz!"
                             className="submit-button"
+                            onClick={() => {this.handleSubmitQuiz()}}
                         />
                     </form>
                 </main>
