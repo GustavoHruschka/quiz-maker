@@ -1,6 +1,16 @@
 :root {
   font-size: 60%;
-  background-color: #121212;
+  background-color: var(--dark-background-color);
+
+  --h1-color: #f8f8f8;
+  --h2-color: #d8d8d8;
+  --dark-background-color: #121212;
+  --header-color: blueviolet;
+  --main-input-bg-color: #eeeeee;
+  --secondary-input-bg-color: #d3d3d3;
+  --quiz-item-bg-color: #b3b2b2;
+  --placeholder-color: #2e2e2e;
+  --button-color: #622be2;
 }
 
 * {

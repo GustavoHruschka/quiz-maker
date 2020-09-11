@@ -5,6 +5,7 @@ import { faLongArrowAltLeft, faPlus } from '@fortawesome/free-solid-svg-icons'
 import CreateQuizItem from '../../components/CreateQuizItem'
 
 import './styles.css'
+import { Link } from 'react-router-dom'
 
 
 interface questionItem {
@@ -19,14 +20,16 @@ const blankQuestionItem: questionItem = {
     selectedRightOptionNumber: 0
 }
 
-interface myState {
+interface createQuizState {
+    title: string
     questions: Array<questionItem>
 }
 
-class CreateQuiz extends React.Component<{}, myState> {
+class CreateQuiz extends React.Component<{}, createQuizState> {
     constructor(props: Readonly<{}>) {
         super(props)
         this.state = {
+            title: '',
             questions: [blankQuestionItem, blankQuestionItem],
         }
 
@@ -40,6 +43,10 @@ class CreateQuiz extends React.Component<{}, myState> {
 
     handleSubmitQuiz() {
         console.log(this.state.questions)
+    }
+
+    handleQuizTitleChange(event: React.FormEvent<HTMLInputElement>) {
+        this.setState({ title: event.currentTarget.value })
     }
 
     handleAddQuestion() {
@@ -124,19 +131,31 @@ class CreateQuiz extends React.Component<{}, myState> {
         return (
             <div id="create-quiz-page-container">
                 <header className="page-header">
-                    <FontAwesomeIcon
-                        icon={faLongArrowAltLeft}
-                        className="page-header-back-icon"
-                    />
+                    <Link to="/" className="page-header-back-link">
+                        <FontAwesomeIcon
+                            icon={faLongArrowAltLeft}
+                            className="page-header-back-icon"
+                        />
+                    </Link>
 
-                    <p className="page-header-logo">Quizzyes</p>
+                    <p className="page-header-logo">Quizzyes!</p>
                 </header>
 
                 <main className="create-quiz-page-body">
                     <h1>Make your own Quizzyes!</h1>
                     <h2>Just write down the <br />
                 questions and it'll be ready to share.</h2>
+
                     <form className="questions-container">
+                        <label htmlFor="quiz-title-input" className="quiz-title-input-label">
+                            <span className="quiz-title-label-text">Title</span>
+                            <input
+                                type="text"
+                                id="quiz-title-input"
+                                onChange={event => {this.handleQuizTitleChange(event)}}
+                            />
+                        </label>
+
                         {this.state.questions.map((question, index) =>
                             <CreateQuizItem
                                 key={index}
@@ -166,7 +185,7 @@ class CreateQuiz extends React.Component<{}, myState> {
                             type="button"
                             value="Submit Quiz!"
                             className="submit-button"
-                            onClick={() => {this.handleSubmitQuiz()}}
+                            onClick={() => { this.handleSubmitQuiz() }}
                         />
                     </form>
                 </main>

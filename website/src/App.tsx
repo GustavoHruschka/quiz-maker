@@ -1,11 +1,11 @@
 import React from 'react';
 
-import CreateQuiz from './pages/CreateQuiz';
+import Routes from './Routes';
 
 function App() {
   return (
     <div className="App">
-      <CreateQuiz />
+      <Routes />
     </div>
   );
 }

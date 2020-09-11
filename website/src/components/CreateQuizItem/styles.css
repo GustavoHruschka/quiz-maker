@@ -1,18 +1,17 @@
 .quiz-item-container {
     width: 100%;
     margin-top: 2.4rem;
-    background-color: #b3b2b2;
+    background-color: var(--quiz-item-bg-color);
     border-radius: 0.4rem;
     overflow: hidden;
-    box-shadow: 0.2rem 0.2rem 0.4rem #000000;
+    box-shadow: 0.2rem 0.2rem 0.4rem black;
 }
 
 .quiz-item-header {
     background-color: blueviolet;
     height: 2rem;
     color: white;
-    border-bottom: solid 0.15rem #121212;
-
+    border-bottom: solid 0.15rem var(--dark-background-color);
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -29,7 +28,7 @@
 .quiz-item-header .header-button{
     width: 2rem;
     height: 100%;
-    border-left: solid 0.15rem #121212;
+    border-left: solid 0.15rem var(--dark-background-color);
     font-size: 1.2rem;
     display: flex;
     align-items: center;
@@ -46,15 +45,15 @@
     font-size: 1.9rem;
     font-weight: 150;
     text-align: center;
-    background-color: #eeeeee;
-    color: #121212;
-    box-shadow: 0rem 0.1rem 0.3rem #121212;
+    background-color: var(--main-input-bg-color);
+    color: var(--dark-background-color);
+    box-shadow: 0rem 0.1rem 0.3rem var(--dark-background-color);
 
     outline: none;
     border: 0;
 }
 .question::placeholder {
-    color: #2e2e2e;
+    color: var(--placeholder-color);
 }
 
 .answer {
@@ -73,8 +72,8 @@
     height: 4rem;
     min-width: 75%;
 
-    background-color: #d3d3d3;
-    color: #121212;
+    background-color: var(--secondary-input-bg-color);
+    color: var(--dark-background-color);
     font-size: 1.7rem;
     outline: none;
     border: none;
@@ -82,18 +81,14 @@
     transition: 200ms;
     text-align: center;
 }
-.options:hover {
-    background-color: #dddddd;
-}
 .options:focus {
-    background-color: #eeeeee;
+    background-color: var(--main-input-bg-color);
 }
 
 .right-option-selector-container {
-    background-color: #d3d3d3;
+    background-color: var(--secondary-input-bg-color);
     width: 100%;
-
-    border-left: 0.2rem solid #b3b2b2;
+    border-left: 0.2rem solid var(--quiz-item-bg-color);
 
     display: flex;
     align-items: center;
@@ -107,7 +102,7 @@
 }
 .right-option-selector-container .checkmark {
     border: solid blueviolet 0.2rem;
-    background-color: #b3b2b2;
+    background-color: var(--quiz-item-bg-color);
     width: 2.1rem;
     height: 2.1rem;
     border-radius: 50%;
@@ -118,7 +113,7 @@
 }
 .right-option-selector-container input:checked + .checkmark {
     border-color: blueviolet;
-    background-color: #eeeeee;
+    background-color: var(--main-input-bg-color);
 }
 .checkmark::after {
     width: 0.5rem;
@@ -143,10 +138,10 @@
 
 .delete-option-button {
     width: 100%;
-    background-color: #d3d3d3;
-    border-left: #b3b2b2 solid 0.2rem;
+    background-color: var(--secondary-input-bg-color);
+    border-left: var(--quiz-item-bg-color) solid 0.2rem;
     font-size: 1.8rem;
-    color: #121212;
+    color: var(--dark-background-color);
 
     display: flex;
     align-items: center;
@@ -155,9 +150,9 @@
 
 .add-option-button {
     height: 4rem;
-    background-color: #eeeeee;
-    color: #121212;
-    box-shadow: 0 -0.1rem 0.3rem #121212;
+    background-color: var(--main-input-bg-color);
+    color: var(--dark-background-color);
+    box-shadow: 0 -0.1rem 0.3rem var(--dark-background-color);
     font-size: 1.7rem;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;    

@@ -10,11 +10,9 @@ interface questionItem {
     selectedRightOptionNumber: number
 }
 
-interface myState {
-    isQuestionMinimized: boolean
-}
+interface createQuizItemState { isQuestionMinimized: boolean }
 
-interface myProps {
+interface createQuizItemProps {
     questionData: questionItem
     questionNumber: number
 
@@ -26,8 +24,8 @@ interface myProps {
     handleDeleteOption: Function
 }
 
-class CreateQuizItem extends React.Component<myProps, myState> {
-    constructor(props: Readonly<myProps>) {
+class CreateQuizItem extends React.Component<createQuizItemProps, createQuizItemState> {
+    constructor(props: Readonly<createQuizItemProps>) {
         super(props)
         this.state = {
             isQuestionMinimized: false
