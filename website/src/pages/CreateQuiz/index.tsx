@@ -22,6 +22,7 @@ const blankQuestionItem: questionItem = {
 
 interface createQuizState {
     title: string
+    description: string
     questions: Array<questionItem>
 }
 
@@ -30,6 +31,7 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
         super(props)
         this.state = {
             title: '',
+            description: '',
             questions: [blankQuestionItem, blankQuestionItem],
         }
 
@@ -47,6 +49,14 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
 
     handleQuizTitleChange(event: React.FormEvent<HTMLInputElement>) {
         this.setState({ title: event.currentTarget.value })
+    }
+
+    handleQuizDescriptionChange(event: React.FormEvent<HTMLTextAreaElement>) {
+        if (event.currentTarget.value.length >= 150) {
+            window.alert("The description can't have more than 150 characters" )
+        } else {
+            this.setState({ description: event.currentTarget.value })
+        }
     }
 
     handleAddQuestion() {
@@ -148,11 +158,19 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
 
                     <form className="questions-container">
                         <label htmlFor="quiz-title-input" className="quiz-title-input-label">
-                            <span className="quiz-title-label-text">Title</span>
+                            <span className="quiz-title-label-text">Quiz title:</span>
                             <input
                                 type="text"
                                 id="quiz-title-input"
                                 onChange={event => {this.handleQuizTitleChange(event)}}
+                            />
+                        </label>
+                        
+                        <label htmlFor="quiz-description-textarea" className="quiz-description-textarea-label">
+                            <span className="quiz-description-label-text">Description:</span>
+                            <textarea
+                                id="quiz-description-textarea"
+                                onChange={event => {this.handleQuizDescriptionChange(event)}}
                             />
                         </label>
 

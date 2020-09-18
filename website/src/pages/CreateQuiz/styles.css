@@ -26,43 +26,48 @@
 }
 
 .create-quiz-page-body {
-    padding: 0 3%;
     padding-top: 2rem;
 }
 
 .create-quiz-page-body h1{
     font-family: 'Oswald';
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 300;
     color: var(--h1-color);
     margin-bottom: 0.8rem;
+    margin-left: 1rem;
 }
 
 .create-quiz-page-body h2 {
     font-family: 'Oswald';
-    font-size: 1.7rem;
+    font-size: 2rem;
     font-weight: 300;
     color: var(--h2-color);
     margin-bottom: 1rem;
+    margin-left: 1rem;
 }
 
 .questions-container {
+    border-top: solid 0.5rem var(--header-color);
+    margin-top: 3rem;
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.quiz-title-input-label {
-    width: 100%;
-    margin-top: 4rem;
-    display: flex;
-    flex-direction: column;
-}
 
 .quiz-title-input-label .quiz-title-label-text {
-    color: white;
-    font-size: 2rem;
+    color: var(--h1-color);
+    font-size: 2.4rem;
     font-family: 'Oswald';
+}
+
+.quiz-title-input-label {
+    width: 96%;
+    margin-top: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .quiz-title-input-label #quiz-title-input {
@@ -77,12 +82,37 @@
     font-family: 'Oswald';
 }
 
+.quiz-description-textarea-label {
+    width: 96%;
+    margin-top: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.quiz-description-label-text {
+    color: var(--h1-color);
+    font-size: 2.4rem;
+    font-family: 'Oswald';
+}
+
+.quiz-description-textarea-label #quiz-description-textarea {
+    height: 12.5rem;
+    resize: none;
+    font-size: 2rem;
+    border-radius: 0.8rem;
+    border: none;
+    outline: none;
+    padding: 0.3rem 1.3rem;
+    background-color: var(--main-input-bg-color);
+    font-family: 'Oswald';
+}
+
 .create-quiz-page-body .questions-container .add-question-button {
-    background-color: var(--button-color);
+    background-color: var(--header-color);
     color: var(--h1-color);
     border: 0;
     height: 2.5rem;
-    margin: 2rem;
+    margin-top: 2rem;
     padding: 1rem;
     width: 50%;
     border-radius: 10rem;
@@ -96,23 +126,21 @@
     align-items: center;
     justify-content: center;
 }
-
 .create-quiz-page-body .questions-container .add-question-button .add-question-icon {
     margin-right: 1rem;
 }
 
 .create-quiz-page-body .questions-container .submit-button {
-    background-color: var(--button-color);
+    background-color: var(--header-color);
     color: white;
     font-family: 'Oswald';
-    font-size: 2rem;
+    font-size: 3.5rem;
     font-weight: 500;
-    height: 5rem;
+    height: 8rem;
+    margin-top: 3rem;
     width: 100%;
-    margin-bottom: 2rem;
     align-self: flex-end;
     border: 0;
-    border-radius: 0.8rem;
     box-shadow: 0.2rem 0.2rem 0.4rem black;
 
     cursor: pointer;
@@ -121,7 +149,15 @@
 @media(min-width: 1000px) {
     .create-quiz-page-body {
         margin: auto;
-        width: 50%;
+        width: 65%;
         padding-top: 2rem;
+    }
+
+    .quiz-title-input-label, .quiz-description-textarea-label {
+        width: 100%;
+    }
+
+    .create-quiz-page-body h1, .create-quiz-page-body h2 {
+        margin-left: 0;
     }
 }

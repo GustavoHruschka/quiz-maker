@@ -2,7 +2,6 @@
     width: 100%;
     margin-top: 2.4rem;
     background-color: var(--quiz-item-bg-color);
-    border-radius: 0.4rem;
     overflow: hidden;
     box-shadow: 0.2rem 0.2rem 0.4rem black;
 }
