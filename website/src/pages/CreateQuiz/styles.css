@@ -148,8 +148,6 @@
 
 @media(min-width: 1000px) {
     .create-quiz-page-body {
-        margin: auto;
-        width: 65%;
         padding-top: 2rem;
     }
 

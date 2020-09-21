@@ -1,12 +1,11 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltLeft, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import CreateQuizItem from '../../components/CreateQuizItem'
 
 import './styles.css'
-import { Link } from 'react-router-dom'
-
+import PageHeader from '../../components/PageHeader'
 
 interface questionItem {
     questionText: string
@@ -32,7 +31,7 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
         this.state = {
             title: '',
             description: '',
-            questions: [blankQuestionItem, blankQuestionItem],
+            questions: [blankQuestionItem, blankQuestionItem, blankQuestionItem],
         }
 
         this.handleDeleteQuestion = this.handleDeleteQuestion.bind(this)
@@ -140,16 +139,7 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     render() {
         return (
             <div id="create-quiz-page-container">
-                <header className="page-header">
-                    <Link to="/" className="page-header-back-link">
-                        <FontAwesomeIcon
-                            icon={faLongArrowAltLeft}
-                            className="page-header-back-icon"
-                        />
-                    </Link>
-
-                    <p className="page-header-logo">Quizzyes!</p>
-                </header>
+                <PageHeader />
 
                 <main className="create-quiz-page-body">
                     <h1>Make your own Quizzyes!</h1>

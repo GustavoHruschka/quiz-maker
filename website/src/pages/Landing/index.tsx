@@ -4,8 +4,6 @@ import LandindQuizItem from '../../components/LandingQuizItem'
 
 import './styles.css'
 
-
-
 class Landing extends React.Component<{}> {
     render() {
         return (
@@ -18,75 +16,75 @@ class Landing extends React.Component<{}> {
                     <ul className="quiz-list">
                         <li className="quiz-list-item">
                             <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />   <LandindQuizItem
-                                quizPath='anypath'
+                                quizPath='/view-quiz'
                                 quizTitle="quiz title"
                                 quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
                             />

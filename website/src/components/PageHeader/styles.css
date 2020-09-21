@@ -1,0 +1,26 @@
+.page-header {
+    background-color: blueviolet;
+    height: 5rem;
+    color: white;
+    box-shadow: 0 0.1rem 0.2rem black;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header-logo {
+    font-family: 'Lemonada';
+    margin-right: 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.page-header .page-header-back-link {
+    color: white;
+}
+
+.page-header-back-icon {
+    margin-left: 2rem;
+    font-size: 1.8rem;
+}

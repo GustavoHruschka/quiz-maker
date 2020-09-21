@@ -34,8 +34,13 @@ html, body {
   border-radius: 1rem;
 }
 
-@media(maxwidth: 1000) {
+@media(min-width: 1100px) {
   :root {
     font-size: 65%;
+  }
+
+  .app {
+    width: 65%;
+    margin: auto;
   }
 }
