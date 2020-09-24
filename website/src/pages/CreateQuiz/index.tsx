@@ -43,7 +43,7 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     }
 
     handleSubmitQuiz() {
-        console.log(this.state.questions)
+        console.log(this.state)
     }
 
     handleQuizTitleChange(event: React.FormEvent<HTMLInputElement>) {
@@ -104,7 +104,6 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
         questionsCopy[questionNumber] = questionCopy
 
         this.setState({ questions: questionsCopy })
-        console.log(this.state)
     }
 
     handleAddOption(questionNumber: number) {
@@ -117,7 +116,6 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
         questionsCopy[questionNumber] = questionCopy
 
         this.setState({ questions: questionsCopy })
-        console.log(this.state)
     }
 
     handleDeleteOption(questionNumber: number, optionNumber: number) {

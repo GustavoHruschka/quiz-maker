@@ -47,7 +47,7 @@
     margin-left: 1rem;
 }
 
-.questions-container {
+.create-quiz-page-body .questions-container {
     border-top: solid 0.5rem var(--header-color);
     margin-top: 3rem;
     padding-top: 2rem;
@@ -55,7 +55,6 @@
     flex-direction: column;
     align-items: center;
 }
-
 
 .quiz-title-input-label .quiz-title-label-text {
     color: var(--h1-color);
