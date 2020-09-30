@@ -24,27 +24,27 @@ const quizData: quizData = {
     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     questions: [
         {
-            optionsText: [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ],
+            optionsText: ['Lorem', 'ipsum', 'dolor', 'sit', 'amet'],
             questionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             selectedRightOptionNumber: 3
         },
         {
-            optionsText: [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ],
+            optionsText: ['Lorem', 'ipsum', 'dolor', 'sit', 'amet'],
             questionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             selectedRightOptionNumber: 2
         },
         {
-            optionsText: [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ],
+            optionsText: ['Lorem', 'ipsum', 'dolor', 'sit', 'amet'],
             questionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             selectedRightOptionNumber: 1
         },
         {
-            optionsText: [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ],
+            optionsText: ['Lorem', 'ipsum', 'dolor', 'sit', 'amet'],
             questionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             selectedRightOptionNumber: 4
         },
         {
-            optionsText: [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ],
+            optionsText: ['Lorem', 'ipsum', 'dolor', 'sit', 'amet'],
             questionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             selectedRightOptionNumber: 0
         },
