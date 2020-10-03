@@ -3,7 +3,7 @@ import Knex from 'knex'
 export async function up(knex: Knex) {
     return knex.schema.createTable('quizzes_questions', table => {
         table
-            .integer('quiz-id')
+            .integer('quiz_id')
             .references('id')
             .inTable('quizzes')
             .onUpdate('CASCADE')
