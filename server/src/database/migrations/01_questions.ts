@@ -4,6 +4,7 @@ export async function up(knex: Knex) {
     return knex.schema.createTable('questions', table => {
         table.increments('id').primary()
         table.string('text').notNullable()
+        table.integer('question_number').notNullable()
         table.integer('right_option').notNullable()
         table
             .integer('quiz_id')

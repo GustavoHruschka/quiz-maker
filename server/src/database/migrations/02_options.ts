@@ -5,6 +5,13 @@ export async function up(knex: Knex) {
         table.increments('id').primary()
         table.string('text').notNullable()
         table
+            .integer('question_number')
+            .references('question_number')
+            .inTable('questions')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE')
+            .notNullable()
+        table
             .integer('quiz_id')
             .references('id')
             .inTable('quizzes')

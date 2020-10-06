@@ -1,20 +1,56 @@
 import db from '../database/connections'
 import { Request, Response } from 'express'
 
-interface questionItem {
+interface questionData {
     questionText: string
     selectedRightOptionNumber: number
     optionsText: Array<string>
 }
 
+interface quizData {
+    title: string
+    description: string
+    questions: Array<questionData>
+}
+
 export default class QuizzesController {
     async index(request: Request, response: Response) {
-        return response.send('Okay! You made a GET request')
+        try {
+            const { quizId } = request.query
+
+            const [{ title, description }] = await db('quizzes')
+                .where({ id: quizId })
+                .select('title', 'description')
+
+            let questions: Array<questionData> = await db('questions')
+                .where({ quiz_id: quizId })
+                .select('text', 'right_option')
+
+            for (let questionNumber in questions) {
+                let options = await db('options')
+                    .where({
+                        quiz_id: quizId,
+                        question_number: questionNumber
+                    })
+                    .select('text')
+
+                let optionsText = options.map(option => option.text)
+
+                questions[questionNumber].optionsText = optionsText 
+            }
+            
+            const quizData: quizData = { title, description, questions }
+            return response.send(quizData)
+        }
+        catch (error) {
+            console.log(error)
+            return response.status(400).send('An error occurred.')
+        }
     }
 
     async create(request: Request, response: Response) {
         const trx = await db.transaction()
-        
+
         try {
             const {
                 title,
@@ -28,43 +64,35 @@ export default class QuizzesController {
             })
 
             for (let questionNumber in questions) {
-                const question: questionItem = questions[questionNumber]
+                const question: questionData = questions[questionNumber]
 
                 const insertedQuestionId = await trx('questions').insert({
                     text: question.questionText,
+                    question_number: questionNumber,
                     right_option: question.selectedRightOptionNumber,
-                    quiz_id: insertedQuizId[0]
-                })
-
-                await trx('quizzes_questions').insert({
                     quiz_id: insertedQuizId[0],
-                    question_id: insertedQuestionId[0]
                 })
 
                 for (let optionNumber in question.optionsText) {
                     const optionText = question.optionsText[optionNumber]
 
-                    const insertedOptionId = await trx('options').insert({
+                    await trx('options').insert({
                         text: optionText,
+                        question_number: questionNumber,
                         quiz_id: insertedQuizId[0],
                         question_id: insertedQuestionId[0]
-                    })
-
-                    await trx('questions_options').insert({
-                        question_id: insertedQuestionId[0],
-                        option_id: insertedOptionId[0]
                     })
                 }
             }
 
             await trx.commit()
-            return response.status(200).send('POST done!')
+            return response.status(200).send()
         }
 
         catch (error) {
             console.log(error)
             await trx.rollback()
-            return response.status(400).send('An error occured')
+            return response.status(400).send('An error occured.')
         }
     }
 }
