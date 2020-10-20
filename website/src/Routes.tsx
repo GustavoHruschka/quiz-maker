@@ -10,7 +10,7 @@ function Routes() {
         <BrowserRouter>
             <Route path="/" component={Landing} exact />
             <Route path="/create-quiz" component={CreateQuiz} />
-            <Route path="/view-quiz" component={ViewQuiz} /> 
+            <Route path="/view-quiz/:id" component={ViewQuiz} /> 
         </BrowserRouter>
     )
 }

@@ -7,7 +7,7 @@ const routes = express.Router()
 const quizzesController = new QuizzesController()
 const landingQuizzesController = new LandingQuizzesController
 
-routes.get('/quizzes', quizzesController.index)
+routes.get('/quizzes/:id', quizzesController.index)
 routes.post('/quizzes', quizzesController.create)
 routes.get('/landing', landingQuizzesController.index)
 routes.post('/landing', landingQuizzesController.create)

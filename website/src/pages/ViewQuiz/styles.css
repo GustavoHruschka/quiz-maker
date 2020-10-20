@@ -24,6 +24,59 @@
     align-items: center;
 }
 
+.view-quiz-page-container .result-box {
+    width: 90%;
+    margin: auto;
+    margin-top: 0rem;
+    height: 18rem;
+    background-color: var(--dark-background-color);
+    font-family: 'Oswald', sans-serif;
+
+
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 1.3fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        "primary primary percentage"
+        "secondary secondary percentage"
+    ;
+}
+
+.view-quiz-page-container .result-primary-message {
+    grid-area: primary;
+
+    color: var(--h1-color);
+    font-weight: 300;
+
+    margin: auto 0;
+    font-size: 2.8rem;
+}
+
+.view-quiz-page-container .result-secondary-message {
+    grid-area: secondary;
+
+    color: var(--h2-color);
+    font-weight: 300;
+    font-size: 2rem;
+    width: 80%;
+}
+
+.view-quiz-page-container .result-percentage-circle {
+    grid-area: percentage;
+    height: 12rem;
+    width: 12rem;
+    border-radius: 50%;
+    background-color: var(--h2-color);
+    margin: auto;
+    font-size: 3rem;
+    color: var(--header-color);
+    border: var(--header-color) 0.4rem solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media(min-width: 1000px) {
     .view-quiz-page-container .quiz-title, .view-quiz-page-container .quiz-description {
         margin-left: 0;

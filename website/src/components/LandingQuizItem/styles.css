@@ -2,18 +2,6 @@
     text-decoration: none;
 }
 
-.quiz-item {
-    margin-top: 0.5rem;
-    border-top: solid 0.1rem var(--header-color);
-    padding: 0 3%;
-    padding-top: 0.5rem;
-    text-decoration: none;
-}
-.quiz-item:first-child {
-    border-top: none;
-    padding-top: none;
-}
-
 .quiz-item .quiz-title {
     color: var(--h1-color);
     font-size: 2.4rem;

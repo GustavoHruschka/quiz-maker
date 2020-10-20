@@ -2,85 +2,97 @@ import React from 'react'
 
 import './styles.css'
 
+const quizDynamicButtonStyles = {
+  questionNotAnsweredYet: {
+    backgroundColor: 'var(secondary-input-bg-color)',
+  },
+  rightOption: {
+    backgroundColor: 'green',
+    color: 'var(--h2-color)'
+  },
+  wrongOption: {
+    opacity: 0.4
+  },
+  wrongAnswer: {
+    backgroundColor: 'red',
+    color: 'var(--h2-color)',
+    opacity: 0.4
+  }
+}
+
 interface questionData {
-    questionText: string
-    optionsText: Array<string>
-    selectedRightOptionNumber: number
+  text: string
+  optionsText: Array<string>
+  right_option: number
 }
 
 interface viewQuizItemProps {
-    question: questionData
+  question: questionData
+  questionNumber: number
+  changeViewQuizState: Function
 }
 
 interface viewQuizItemState {
-    isQuestionAnswered: boolean
-    wrongAnswer: number
-}
-
-const quizButtonStyles = {
-    questionNotAnsweredYet: {
-        backgroundColor: 'var(secondary-input-bg-color)',
-    },
-    rightOption: {
-        backgroundColor: 'green',
-        color: 'var(--h2-color)'
-    },
-    wrongOption: {
-        opacity: 0.4
-    },
-    wrongAnswer: {
-        backgroundColor: 'red',
-        color: 'var(--h2-color)',
-        opacity: 0.4
-    }
+  isQuestionAnswered: boolean
+  wrongAnswer: number | null
 }
 
 class ViewQuizItem extends React.Component<viewQuizItemProps, viewQuizItemState> {
-    constructor(props: Readonly<viewQuizItemProps>) {
-        super(props)
-        this.state = {
-            isQuestionAnswered: false,
-            wrongAnswer: Number()
-        }
+  constructor(props: Readonly<viewQuizItemProps>) {
+    super(props)
+    this.state = {
+      isQuestionAnswered: false,
+      wrongAnswer: null
+    }
+  }
+
+  handleQuestionAnswer(optionNumber: number) {
+    if (this.state.isQuestionAnswered) {
+      return
     }
 
-    handleQuestionAnswer(optionNumber: number) {
-        this.setState({ isQuestionAnswered: true })
+    const isAnswerRight: boolean = optionNumber === this.props.question.right_option
 
-        if (optionNumber !== this.props.question.selectedRightOptionNumber) {
-            this.setState({ wrongAnswer: optionNumber })
-        }
+    this.props.changeViewQuizState(this.props.questionNumber, isAnswerRight)
+
+    this.setState({ isQuestionAnswered: true })
+
+    if (isAnswerRight) {
+      this.setState({ wrongAnswer: null })
+    } else {
+      this.setState({ wrongAnswer: optionNumber })
     }
+  }
 
-    render() {
-        return (
-            <fieldset className="question-container">
-                <div className="question">{this.props.question.questionText}</div>
+  render() {
+    return (
+      <fieldset className="question-container">
+        <div className="question">{this.props.question.text}</div>
 
-                <div className="options-container">
-                    {this.props.question.optionsText.map((optionText, optionNumber) => {
-                        return (
-                            <input
-                                type="button"
-                                className="option"
-                                key={optionNumber}
-                                value={optionText}
-                                onClick={() => { this.handleQuestionAnswer(optionNumber) }}
-                                style={this.state.isQuestionAnswered
-                                    ? this.props.question.selectedRightOptionNumber === optionNumber
-                                        ? quizButtonStyles.rightOption
-                                        : optionNumber === this.state.wrongAnswer
-                                            ? quizButtonStyles.wrongAnswer
-                                            : quizButtonStyles.wrongOption 
-                                    : quizButtonStyles.questionNotAnsweredYet
-                                }
-                            />
-                        )
-                    })}
-                </div>
-            </fieldset>
-        )
-    }
+        <div className="options-container">
+          {this.props.question.optionsText.map((optionText, optionNumber) => {
+            return (
+              <input
+                type="button"
+                className="option"
+                key={optionNumber}
+                value={optionText}
+                onClick={() => { this.handleQuestionAnswer(optionNumber) }}
+                style={this.state.isQuestionAnswered
+                  ? this.props.question.right_option === optionNumber
+                    ? quizDynamicButtonStyles.rightOption
+                    : optionNumber === this.state.wrongAnswer
+                      ? quizDynamicButtonStyles.wrongAnswer
+                      : quizDynamicButtonStyles.wrongOption
+                  : quizDynamicButtonStyles.questionNotAnsweredYet
+                }
+              />
+            )
+          })}
+        </div>
+      </fieldset>
+    )
+  }
 }
 
 export default ViewQuizItem

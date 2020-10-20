@@ -1,103 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+
 import LandindQuizItem from '../../components/LandingQuizItem'
+import api from '../../services/api'
 
 import './styles.css'
 
-class Landing extends React.Component<{}> {
-    render() {
-        return (
-            <div className="landing-page-container">
-                <header className="landing-page-header">
-                    <h1 className="landing-logo">Quizzyes!</h1>
-                </header>
+interface QuizData {
+  id: number
+  title: string
+  description: string
+}
 
-                <main className='landing-page-body'>
-                    <ul className="quiz-list">
-                        <li className="quiz-list-item">
-                            <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />   <LandindQuizItem
-                                quizPath='/view-quiz'
-                                quizTitle="quiz title"
-                                quizDescription="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                            />
-                        </li>
-                    </ul>
+function Landing() {
+  const [quizzes, setQuizzes] = useState<QuizData[]>([])
 
-                    <Link to='/create-quiz' className="create-quiz-link">
-                        Create my quiz!
-                    </Link>
-                </main>
-            </div>
-        )
-    }
+  useEffect(() => {
+    const source = axios.CancelToken.source()
+
+    api
+      .get('landing', { cancelToken: source.token })
+      .then(response => {
+        const quizzesData: QuizData[] = response.data
+        setQuizzes(quizzesData)
+      })
+
+    return () => { source.cancel() }
+  }, [])
+
+  return (
+    <div className="landing-page-container">
+      <header className="landing-page-header">
+        <h1 className="landing-logo">Quizzyes!</h1>
+      </header>
+
+      <main className='landing-page-body'>
+        <ul className="quiz-list">
+          {quizzes.map(quiz => {
+            return (
+              <li className="quiz-list-item" key={quiz.id}>
+                <LandindQuizItem
+                  quizPath={`/view-quiz/${quiz.id}`}
+                  quizTitle={quiz.title}
+                  quizDescription={quiz.description}
+                />
+              </li>
+            )
+          })}
+        </ul>
+
+        <Link to='/create-quiz' className="create-quiz-link">
+          Create my quiz!
+        </Link>
+      </main>
+    </div>
+  )
 }
 
 export default Landing
