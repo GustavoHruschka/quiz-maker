@@ -15,7 +15,7 @@ function PageHeader() {
             />
         </Link>
 
-        <p className="page-header-logo">Quizzyes!</p>
+        <p className="page-header-logo">Donatello</p>
     </header>
     )
 }
