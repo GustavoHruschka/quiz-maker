@@ -67,7 +67,9 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     this.setState({ questions: questionsCopy })
   }
 
-  handleDeleteQuestion(questionNumber: number) {
+  handleDeleteQuestion(event: React.FormEvent<HTMLButtonElement>, questionNumber: number) {
+    event.preventDefault()
+
     if (this.state.questions.length === 1) {
       alert("You can't delete all the questions")
     } else {

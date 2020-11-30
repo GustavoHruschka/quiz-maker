@@ -1,8 +1,9 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faTimes, faWindowMinimize, faWindowMaximize } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faTimes, faWindowMinimize, faWindowMaximize, faImages } from '@fortawesome/free-solid-svg-icons'
 
 import './styles.css'
+import CreateTextOptions from '../CreateTextOptions/CreateTextOptions'
 
 interface questionItem {
   questionText: string
@@ -10,7 +11,10 @@ interface questionItem {
   selectedRightOptionNumber: number
 }
 
-interface createQuizItemState { isQuestionMinimized: boolean }
+interface createQuizItemState {
+  isQuestionMaximized: boolean
+  questionWithImages: boolean
+}
 
 interface createQuizItemProps {
   questionData: questionItem
@@ -28,12 +32,19 @@ class CreateQuizItem extends React.Component<createQuizItemProps, createQuizItem
   constructor(props: Readonly<createQuizItemProps>) {
     super(props)
     this.state = {
-      isQuestionMinimized: false
+      isQuestionMaximized: true,
+      questionWithImages: true
     }
   }
 
-  handleQuestionWindowToggle() {
-    this.setState({ isQuestionMinimized: !this.state.isQuestionMinimized })
+  handleQuestionWindowToggle(event: React.FormEvent<HTMLButtonElement>) {
+    event.preventDefault()
+    this.setState({ isQuestionMaximized: !this.state.isQuestionMaximized })
+  }
+
+  handleQuestionImagesToggle(event: React.FormEvent<HTMLButtonElement>) {
+    event.preventDefault()
+    this.setState({ questionWithImages: !this.state.questionWithImages })
   }
 
   render() {
@@ -41,76 +52,61 @@ class CreateQuizItem extends React.Component<createQuizItemProps, createQuizItem
       <div className="quiz-item-container">
         <header className="quiz-item-header">
           <p className="quiz-item-logo">Donatello</p>
-          <div
+          <button
             className="header-button"
-            onClick={() => this.handleQuestionWindowToggle()}
+            onClick={event => this.handleQuestionImagesToggle(event)}
           >
-            <FontAwesomeIcon icon={this.state.isQuestionMinimized ? faWindowMaximize : faWindowMinimize} className="header-button-icon" />
-          </div>
-          <div
+            <FontAwesomeIcon
+              icon={faImages}
+              className="header-button-icon"
+            />
+          </button>
+          <button
             className="header-button"
-            onClick={() => this.props.handleDeleteQuestion(this.props.questionNumber)}
+            onClick={event => this.handleQuestionWindowToggle(event)}
           >
-            <FontAwesomeIcon icon={faTimes} className="header-button-icon" />
-          </div>
+            <FontAwesomeIcon
+              icon={
+                this.state.isQuestionMaximized
+                  ? faWindowMinimize
+                  : faWindowMaximize
+              }
+              className="header-button-icon"
+            />
+          </button>
+          <button
+            className="header-button"
+            onClick={event => this.props.handleDeleteQuestion(event, this.props.questionNumber)}
+          >
+            <FontAwesomeIcon
+              icon={faTimes}
+              className="header-button-icon"
+            />
+          </button>
         </header>
 
         <textarea
           className="question"
-          placeholder="Write your question here"
+          placeholder="Your question goes here"
           onChange={event => this.props.handleQuestionTextchange(event, this.props.questionNumber)}
         />
 
-        {this.state.isQuestionMinimized ? null :
-          <div className="answer">
-            {this.props.questionData.optionsText.map((optionText, optionNumber) => {
-              return (
-                <div className="option-box" key={'box' + optionNumber}>
-                  <input
-                    className="options"
-                    key={'text' + optionNumber}
-                    type="text"
-                    placeholder={`Option ` + (optionNumber + 1)}
-                    value={optionText}
-                    onChange={(event) => this.props.handleOptionTextChange(event, this.props.questionNumber, optionNumber)}
-                  />
-
-                  <label
-                    htmlFor={'radio' + optionNumber + 'question' + this.props.questionNumber}
-                    className="right-option-selector-container"
-                  >
-                    <input
-                      className="right-option-selector"
-                      key={'radio' + optionNumber}
-                      id={'radio' + optionNumber + 'question' + this.props.questionNumber}
-                      type="radio"
-                      name={"select-right-option" + this.props.questionNumber}
-                      onChange={() => this.props.handleSelectRightOption(this.props.questionNumber, optionNumber)}
-                      checked={this.props.questionData.selectedRightOptionNumber === optionNumber}
-                    />
-                    <span className="checkmark"></span>
-                  </label>
-
-                  <div
-                    className="delete-option-button"
-                    onClick={() => this.props.handleDeleteOption(this.props.questionNumber, optionNumber)}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTrashAlt}
-                      className="delete-option-icon"
-                    />
-                  </div>
-                </div>
-              )
-            })}
-
-            <input
-              type="button"
-              className="add-option-button"
-              onClick={() => this.props.handleAddOption(this.props.questionNumber)}
-              value="Add option"
-            />
+        {this.state.isQuestionMaximized &&
+          this.state.questionWithImages
+          ?
+          <div>
+            <h1>Imagens vêm aqui!!!!</h1>
           </div>
+          :
+          <CreateTextOptions
+            questionData={this.props.questionData}
+            questionNumber={this.props.questionNumber}
+
+            handleAddOption={this.props.handleAddOption}
+            handleDeleteOption={this.props.handleDeleteOption}
+            handleOptionTextChange={this.props.handleOptionTextChange}
+            handleSelectRightOption={this.props.handleSelectRightOption}
+          />
         }
       </div>
     )
