@@ -34,13 +34,6 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
       description: '',
       questions: [blankQuestionItem, blankQuestionItem, blankQuestionItem],
     }
-
-    this.handleDeleteQuestion = this.handleDeleteQuestion.bind(this)
-    this.handleQuestionTextChange = this.handleQuestionTextChange.bind(this)
-    this.handleOptionTextChange = this.handleOptionTextChange.bind(this)
-    this.handleSelectRightOption = this.handleSelectRightOption.bind(this)
-    this.handleAddOption = this.handleAddOption.bind(this)
-    this.handleDeleteOption = this.handleDeleteOption.bind(this)
   }
 
   async handleSubmitQuiz() {
@@ -53,21 +46,21 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     }
   }
 
-  handleQuizTitleChange(event: React.FormEvent<HTMLInputElement>) {
+  handleQuizTitleChange = (event: React.FormEvent<HTMLInputElement>) => {
     this.setState({ title: event.currentTarget.value })
   }
 
-  handleQuizDescriptionChange(event: React.FormEvent<HTMLTextAreaElement>) {
+  handleQuizDescriptionChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
     this.setState({ description: event.currentTarget.value })
   }
 
-  handleAddQuestion() {
+  handleAddQuestion = () => {
     let questionsCopy = [...this.state.questions]
     questionsCopy.push(blankQuestionItem)
     this.setState({ questions: questionsCopy })
   }
 
-  handleDeleteQuestion(event: React.FormEvent<HTMLButtonElement>, questionNumber: number) {
+  handleDeleteQuestion = (event: React.FormEvent<HTMLButtonElement>, questionNumber: number) => {
     event.preventDefault()
 
     if (this.state.questions.length === 1) {
@@ -79,7 +72,7 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     }
   }
 
-  handleQuestionTextChange(event: React.FormEvent<HTMLTextAreaElement>, questionNumber: number) {
+  handleQuestionTextChange = (event: React.FormEvent<HTMLTextAreaElement>, questionNumber: number) => {
     let questionsCopy = [...this.state.questions]
     let questionCopy = { ...questionsCopy[questionNumber] }
 
@@ -89,7 +82,8 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     this.setState({ questions: questionsCopy })
   }
 
-  handleOptionTextChange(event: React.FormEvent<HTMLInputElement>, questionNumber: number, optionNumber: number) {
+
+  handleOptionTextChange = (event: React.FormEvent<HTMLInputElement>, questionNumber: number, optionNumber: number) => {
     let questionsCopy = [...this.state.questions]
     let questionCopy = { ...questionsCopy[questionNumber] }
     let optionsTextCopy = [...questionCopy.optionsText]
@@ -101,7 +95,7 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     this.setState({ questions: questionsCopy })
   }
 
-  handleSelectRightOption(questionNumber: number, optionNumber: number) {
+  handleSelectRightOption = (questionNumber: number, optionNumber: number) => {
     let questionsCopy = [...this.state.questions]
     let questionCopy = { ...questionsCopy[questionNumber] }
 
@@ -111,7 +105,7 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     this.setState({ questions: questionsCopy })
   }
 
-  handleAddOption(questionNumber: number) {
+  handleAddOption = (questionNumber: number) => {
     let questionsCopy = [...this.state.questions]
     let questionCopy = { ...questionsCopy[questionNumber] }
     let optionsTextCopy = [...questionCopy.optionsText]
@@ -123,7 +117,7 @@ class CreateQuiz extends React.Component<{}, createQuizState> {
     this.setState({ questions: questionsCopy })
   }
 
-  handleDeleteOption(questionNumber: number, optionNumber: number) {
+  handleDeleteOption = (questionNumber: number, optionNumber: number) => {
     if (this.state.questions[questionNumber].optionsText.length === 1) {
       window.alert("You can't delete all the options")
     } else {

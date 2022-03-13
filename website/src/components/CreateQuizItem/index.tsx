@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faTimes, faWindowMinimize, faWindowMaximize, faImages } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faImages } from '@fortawesome/free-solid-svg-icons'
 
 import './styles.css'
 import CreateTextOptions from '../CreateTextOptions/CreateTextOptions'
@@ -12,7 +12,6 @@ interface questionItem {
 }
 
 interface createQuizItemState {
-  isQuestionMaximized: boolean
   questionWithImages: boolean
 }
 
@@ -31,15 +30,6 @@ interface createQuizItemProps {
 class CreateQuizItem extends React.Component<createQuizItemProps, createQuizItemState> {
   constructor(props: Readonly<createQuizItemProps>) {
     super(props)
-    this.state = {
-      isQuestionMaximized: true,
-      questionWithImages: true
-    }
-  }
-
-  handleQuestionWindowToggle(event: React.FormEvent<HTMLButtonElement>) {
-    event.preventDefault()
-    this.setState({ isQuestionMaximized: !this.state.isQuestionMaximized })
   }
 
   handleQuestionImagesToggle(event: React.FormEvent<HTMLButtonElement>) {
@@ -52,28 +42,7 @@ class CreateQuizItem extends React.Component<createQuizItemProps, createQuizItem
       <div className="quiz-item-container">
         <header className="quiz-item-header">
           <p className="quiz-item-logo">Donatello</p>
-          <button
-            className="header-button"
-            onClick={event => this.handleQuestionImagesToggle(event)}
-          >
-            <FontAwesomeIcon
-              icon={faImages}
-              className="header-button-icon"
-            />
-          </button>
-          <button
-            className="header-button"
-            onClick={event => this.handleQuestionWindowToggle(event)}
-          >
-            <FontAwesomeIcon
-              icon={
-                this.state.isQuestionMaximized
-                  ? faWindowMinimize
-                  : faWindowMaximize
-              }
-              className="header-button-icon"
-            />
-          </button>
+
           <button
             className="header-button"
             onClick={event => this.props.handleDeleteQuestion(event, this.props.questionNumber)}
@@ -91,23 +60,15 @@ class CreateQuizItem extends React.Component<createQuizItemProps, createQuizItem
           onChange={event => this.props.handleQuestionTextchange(event, this.props.questionNumber)}
         />
 
-        {this.state.isQuestionMaximized &&
-          this.state.questionWithImages
-          ?
-          <div>
-            <h1>Imagens vêm aqui!!!!</h1>
-          </div>
-          :
-          <CreateTextOptions
-            questionData={this.props.questionData}
-            questionNumber={this.props.questionNumber}
+        <CreateTextOptions
+          questionData={this.props.questionData}
+          questionNumber={this.props.questionNumber}
 
-            handleAddOption={this.props.handleAddOption}
-            handleDeleteOption={this.props.handleDeleteOption}
-            handleOptionTextChange={this.props.handleOptionTextChange}
-            handleSelectRightOption={this.props.handleSelectRightOption}
-          />
-        }
+          handleAddOption={this.props.handleAddOption}
+          handleDeleteOption={this.props.handleDeleteOption}
+          handleOptionTextChange={this.props.handleOptionTextChange}
+          handleSelectRightOption={this.props.handleSelectRightOption}
+        />
       </div>
     )
   }

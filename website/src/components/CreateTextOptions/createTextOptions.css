@@ -1,5 +1,6 @@
-
 .quiz-item-container .text-answer {
+  background-color: var(--quiz-item-bg-color);
+
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -85,6 +86,7 @@
   border-left: var(--quiz-item-bg-color) solid 0.2rem;
   font-size: 1.8rem;
   color: var(--dark-background-color);
+  cursor: pointer;
 
   display: flex;
   align-items: center;
